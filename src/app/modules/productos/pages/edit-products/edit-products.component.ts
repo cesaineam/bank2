@@ -26,7 +26,7 @@ export class EditProductsComponent implements OnInit {
       descripcion: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(200)]],
       logo: ['', Validators.required],
       fechaLiberacion: ['', [Validators.required]],
-      fechaRevision: ['', [Validators.required]],
+      fechaRevision: [{ value: '' }, [Validators.required]],
     });
   }
 
@@ -64,9 +64,28 @@ export class EditProductsComponent implements OnInit {
   
       
       this.formulario.get('id')?.disable();
+      this.formulario.get('fechaRevision')?.disable();
+
+      this.formulario.get('fechaLiberacion')?.valueChanges.subscribe((newFechaLiberacion: string) => {
+        this.setFechaRevision(newFechaLiberacion);
+      });
     } else {
       console.error('No se encontró el producto');
       this.router.navigate(['/productos']);
+    }
+  }
+
+  setFechaRevision(fechaLiberacion: string): void {
+    if (fechaLiberacion) {
+      const fechaLiberacionDate = new Date(fechaLiberacion);
+      // Calcular la fecha de revisión como un año después de la fecha de liberación
+      const fechaRevisionDate = new Date(fechaLiberacionDate.setFullYear(fechaLiberacionDate.getFullYear() + 1));
+
+      // Formatear la fecha de revisión a YYYY-MM-DD
+      const fechaRevisionFormatted = fechaRevisionDate.toISOString().split('T')[0];
+
+      // Establecer el valor de fechaRevision en el formulario
+      this.formulario.get('fechaRevision')?.setValue(fechaRevisionFormatted);
     }
   }
   
@@ -83,17 +102,18 @@ export class EditProductsComponent implements OnInit {
   
       
       const id = this.formulario.get('id')?.value;  
+      const fechaRevision = this.formulario.get('fechaRevision')?.value;
   
-    
       const payload = {
         id: id,  
         name: formValues.nombre,
         description: formValues.descripcion,
         logo: formValues.logo,
         date_release: formValues.fechaLiberacion,
-        date_revision: formValues.fechaRevision
+        date_revision: fechaRevision
       };
-  
+      
+      console.log(payload)
       
   
       // Llamar al servicio para actualizar el producto

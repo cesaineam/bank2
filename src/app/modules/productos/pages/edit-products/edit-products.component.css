@@ -1,4 +1,4 @@
-/* Contenedor principal */
+
 .form-container {
     width: 80%;
     margin: 0 auto;
@@ -8,8 +8,7 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     font-family: Arial, sans-serif;
   }
-  
-  /* Título */
+
   .form-title {
     text-align: center;
     margin-bottom: 20px;
@@ -17,14 +16,14 @@
     color: #333;
   }
   
-  /* Filas del formulario */
+
   .form-row {
     display: flex;
     justify-content: space-between;
     margin-bottom: 15px;
   }
   
-  /* Grupos de formulario */
+
   .form-group {
     width: 48%;
     display: flex;
@@ -89,14 +88,14 @@
     cursor: not-allowed;
   }
   
-  /* Mensajes de error */
+
   .error {
     color: red;
     font-size: 12px;
     margin-top: 5px;
   }
   .btn-secondary {
-    background-color: rgba(15, 38, 92, 0.3); /* Color con opacidad */
+    background-color: rgba(15, 38, 92, 0.3); 
     color: white;
     border: none;
     border-radius: 4px;

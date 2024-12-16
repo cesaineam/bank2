@@ -80,12 +80,12 @@ export class ProductosComponent {
   }
 
   openEdit(product: any) {
-    this.productStateService.setProduct(product); // Almacenar el producto
-    this.router.navigate(['/editar', product.id]); // Navegar a la ruta de edición
+    this.productStateService.setProduct(product); 
+    this.router.navigate(['/editar', product.id]); 
   }
 
   deleteProduct(product: Product): void {
-    // Implementa la lógica para eliminar el producto
+    
     this.paginatedProducts = this.paginatedProducts.filter(
       (p) => p !== product
     );
@@ -122,19 +122,18 @@ export class ProductosComponent {
     return this.openDropdownProduct === product;
   }
 
-  // Abrir el modal
   openDeleteModal(product: Product): void {
     this.selectedProduct = product;
     this.showDeleteModal = true;
   }
 
-  // Cerrar el modal
+
   closeDeleteModal(): void {
     this.showDeleteModal = false;
     this.selectedProduct = null;
   }
 
-  // Confirmar eliminación
+
  
   
 }
