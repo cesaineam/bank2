@@ -1,0 +1,72 @@
+<div class="container">
+    <!-- Botón Agregar -->
+    <div class="header">
+      <button class="btn-agregar" (click)="redirectForm()">Agregar</button>
+    </div>
+  
+    <!-- Barra de búsqueda -->
+    <div class="search-container">
+      <input
+        type="text"
+        [(ngModel)]="filterText"
+        (input)="applyFilter()"
+        placeholder="Buscar..."
+      />
+    </div>
+  
+    <!-- Tabla de productos -->
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Logo</th>
+            <th>Nombre del producto</th>
+            <th>Descripción</th>
+            <th>Fecha de liberación</th>
+            <th>Fecha de reestructuración</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of paginatedProducts">
+            <td>
+              <img [src]="product.logo" alt="logo" />
+            </td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.description }}</td>
+            <td>{{ product.date_release}}</td>
+            <td>{{ product.date_revision }}</td>
+            <td class="actions-column">
+                <button (click)="toggleDropdown(product)">⋮</button>
+                <ul *ngIf="isDropdownOpen(product)" class="dropdown-menu">
+                  <li (click)="openDeleteModal(product)">Eliminar</li>
+                  <li (click)="openEdit(product)">Editar</li>
+                </ul>
+              </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Paginador -->
+    <div class="paginator-container">
+      <span>{{ totalResults }} Resultados</span>
+      <select [(ngModel)]="pageSize" (change)="onPageSizeChange()">
+        <option *ngFor="let size of pageSizes" [value]="size">
+          {{ size }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+
+  <!-- Modal -->
+<div *ngIf="showDeleteModal" class="modal-overlay">
+    <div class="modal">
+      <p>¿Estas seguro de eliminar el producto <strong>{{ selectedProduct?.description }}</strong>?</p>
+      <div class="modal-actions">
+        <button (click)="closeDeleteModal()" class="btn-cancel">Cancelar</button>
+        <button (click)="confirmDelete()" class="btn-confirm">Confirmar</button>
+      </div>
+    </div>
+  </div>

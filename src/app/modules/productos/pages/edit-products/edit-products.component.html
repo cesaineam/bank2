@@ -1,0 +1,113 @@
+<div class="row">
+    <button class="btn btn-primary" (click)="redirectProducts()"> 
+       Atras
+    </button>
+</div>
+<div class="form-container">
+    
+  <h2 class="form-title">Formulario de Actualizacion</h2>
+
+  <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+      <!-- ID -->
+      <div class="form-group">
+        <label for="id">ID</label>
+        <input
+          id="id"
+          type="text"
+          formControlName="id"
+          placeholder="Ingrese el ID"
+          class="form-control"
+          [disabled]="true" 
+        />
+        <small *ngIf="formulario.get('id')?.invalid && formulario.get('id')?.touched" class="error">
+          {{ getErrorMessage('id') }}
+        </small>
+      
+      </div>
+
+      <!-- Nombre -->
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input
+          id="nombre"
+          type="text"
+          formControlName="nombre"
+          placeholder="Ingrese el nombre"
+          class="form-control"
+        />
+        <small *ngIf="formulario.get('nombre')?.invalid && formulario.get('nombre')?.touched" class="error">
+          {{ getErrorMessage('nombre') }}
+        </small>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <!-- Descripción -->
+      <div class="form-group">
+        <label for="descripcion">Descripción</label>
+        <textarea
+          id="descripcion"
+          formControlName="descripcion"
+          placeholder="Ingrese una descripción"
+          class="form-control"
+        ></textarea>
+        <small *ngIf="formulario.get('descripcion')?.invalid && formulario.get('descripcion')?.touched" class="error">
+          {{ getErrorMessage('descripcion') }}
+        </small>
+      </div>
+
+      <!-- Logo -->
+      <div class="form-group">
+        <label for="logo">Logo</label>
+        <input
+          id="logo"
+          type="text"
+          formControlName="logo"
+          placeholder="Ingrese el logo"
+          class="form-control"
+        />
+        <small *ngIf="formulario.get('logo')?.invalid && formulario.get('logo')?.touched" class="error">
+          {{ getErrorMessage('logo') }}
+        </small>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <!-- Fecha Liberación -->
+      <div class="form-group">
+        <label for="fechaLiberacion">Fecha Liberación</label>
+        <input
+          id="fechaLiberacion"
+          type="date"
+          formControlName="fechaLiberacion"
+          class="form-control"
+        />
+        <small *ngIf="formulario.get('fechaLiberacion')?.invalid && formulario.get('fechaLiberacion')?.touched" class="error">
+            {{ getErrorMessage('fechaLiberacion') }}
+          </small>
+      </div>
+
+      <!-- Fecha Revisión -->
+      <div class="form-group">
+        <label for="fechaRevision">Fecha de Revisión</label>
+        <input
+          id="fechaRevision"
+          type="date"
+          formControlName="fechaRevision"
+          class="form-control"
+         
+        />
+        
+      </div>
+    </div>
+
+    <!-- Botones -->
+    <div class="button-container">
+      
+      <button type="submit" class="btn btn-primary" [disabled]="formulario.invalid">Enviar</button>
+    </div>
+  </form>
+</div>
+
+
