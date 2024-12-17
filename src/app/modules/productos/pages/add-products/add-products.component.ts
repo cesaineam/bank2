@@ -94,7 +94,7 @@ export class AddProductsComponent {
       if (!formValues.fechaRevision) {
         const fechaLiberacionDate = new Date(formValues.fechaLiberacion);
         const fechaRevisionDate = new Date(fechaLiberacionDate.setFullYear(fechaLiberacionDate.getFullYear() + 1));
-        formValues.fechaRevision = fechaRevisionDate.toISOString().split('T')[0]; // Asignamos la fecha de revisión
+        formValues.fechaRevision = fechaRevisionDate.toISOString().split('T')[0]; 
       }
   
       const payload = {
@@ -110,7 +110,9 @@ export class AddProductsComponent {
   
       this.productService.addProduct(payload).subscribe({
         next: (response) => {
+          window.alert('Producto creado con éxito.');
           console.log('Producto guardado con éxito:', response);
+          this.router.navigate(['/productos']);
         },
         error: (err) => {
           console.error('Error al guardar el producto:', err);
